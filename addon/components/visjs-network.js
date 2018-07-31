@@ -75,7 +75,7 @@ export default Ember.Component.extend(ContainerMixin, {
 
   didUpdateAttrs(changes) {
     this._super(...arguments);
-
+    
     if (changes.newAttrs.backgroundImage) {
       this.setupBackgroundImage();
     }
