@@ -153,7 +153,9 @@ export default Ember.Component.extend(ContainerMixin, {
 
     // Actually places the adge on visjs
     if (cbResult !== false) {
-      callback(edge);
+      if (edge.from != edge.to) {
+        callback(edge);
+      }
     }
 
     // vis disables adding edges after every edge by default
