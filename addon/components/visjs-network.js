@@ -68,6 +68,22 @@ export default Ember.Component.extend(ContainerMixin, {
       });
     });
 
+    network.on('doubleClick', (e) => {
+        
+        if(e.nodes.length !== 0) {
+          let [ selectedNode ] = e.nodes;
+          let matchingChildNode = _this.get('_childLayers').find((c) => {
+            return `${c.get('nId')}` === `${selectedNode}`;
+          });
+
+          if (matchingChildNode) {
+            matchingChildNode.get('selectDouble')(selectedNode, e);
+          }
+        } else {
+          _this.get('canvasSelect')(e)
+        }
+    })
+
     this.set('network', network);
     this.set('storeAs', this);
     this.setupBackgroundImage();
