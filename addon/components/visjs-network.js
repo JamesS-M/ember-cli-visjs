@@ -44,7 +44,29 @@ export default Ember.Component.extend(ContainerMixin, {
         matchingChildNode.get('select')(selectedNode, e);
       }
     });
+
+    network.on('hoverNode', (e) => {
+      let selectedNode = e.node;
+      let matchingChildNode = _this.get('_childLayers').find((c) => {
+        return `${c.get('nId')}` === `${selectedNode}`;
+      });
+
+      if (matchingChildNode) {
+        matchingChildNode.get('hover')(selectedNode, e);
+      }
+    });
     
+    network.on('blurNode', (e) => {
+      let selectedNode = e.node;
+      let matchingChildNode = _this.get('_childLayers').find((c) => {
+        return `${c.get('nId')}` === `${selectedNode}`;
+      });
+
+      if (matchingChildNode) {
+        matchingChildNode.get('blur')(selectedNode, e);
+      }
+    });
+
     network.on('selectEdge', (e) => {
       let [ selectedEdge ] = e.edges;
       let matchingChildEdge = _this.get('_childLayers').find((c) => {
